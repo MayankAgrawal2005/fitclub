@@ -1,18 +1,4 @@
-// import { useParams } from "react-router-dom";
 
-
-// export default function PlanDetails() {
-// const { id } = useParams();
-
-
-// return (
-// <div>
-// <h2>Plan Details</h2>
-// <p>Preview / Full access logic handled by backend</p>
-// <p>Plan ID: {id}</p>
-// </div>
-// );
-// }
 
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";

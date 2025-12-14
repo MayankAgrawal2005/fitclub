@@ -1,31 +1,4 @@
-// import { useState, useContext } from "react";
-// import { api } from "../api";
-// import { AuthContext } from "../context/AuthContext";
 
-
-// export default function Login() {
-// const [email, setEmail] = useState("");
-// const [password, setPassword] = useState("");
-// const { login } = useContext(AuthContext);
-
-
-// const submit = async () => {
-// const res = await api.post("/auth/login", { email, password });
-// login(res.data.token, res.data.role);
-// };
-
-
-// return (
-// <div className="flex justify-center items-center h-screen">
-// <div className="w-96 p-6 shadow rounded">
-// <h2 className="text-xl font-bold mb-4">Login</h2>
-// <input className="w-full mb-3 border p-2" placeholder="Email" onChange={e => setEmail(e.target.value)} />
-// <input className="w-full mb-3 border p-2" type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-// <button onClick={submit} className="bg-indigo-600 text-white w-full py-2">Login</button>
-// </div>
-// </div>
-// );
-// }
 
 import { useState, useContext } from "react";
 import { api } from "../api";

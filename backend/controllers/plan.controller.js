@@ -23,9 +23,6 @@ export const createPlan = async (req, res) => {
   }
 };
 
-/* ================================
-   PUBLIC: GET ALL PLANS
-================================ */
 export const getPlans = async (req, res) => {
   try {
     const plans = await Plan.find().populate("trainer", "name", "description");
@@ -35,9 +32,7 @@ export const getPlans = async (req, res) => {
   }
 };
 
-/* ================================
-   GET PLAN (FULL / PREVIEW)
-================================ */
+
 export const getPlanById = async (req, res) => {
   try {
     const plan = await Plan.findById(req.params.id).populate(
@@ -50,33 +45,33 @@ export const getPlanById = async (req, res) => {
       return res.status(404).json({ message: "Plan not found" });
     }
 
-    // 🔓 Not logged in → preview (WITH description)
+
     if (!req.user) {
       return res.json({
         title: plan.title,
-        description: plan.description, // ✅ added
+        description: plan.description,
         price: plan.price,
         trainer: plan.trainer,
       });
     }
 
-    // 🔐 Check subscription
+   
     const subscribed = await Subscription.findOne({
       user: req.user.id,
       plan: plan._id,
     });
 
-    // 🔓 Logged in but NOT subscribed → preview (WITH description)
+    
     if (!subscribed) {
       return res.json({
         title: plan.title,
-        description: plan.description, // ✅ added
+        description: plan.description, 
         price: plan.price,
         trainer: plan.trainer,
       });
     }
 
-    // ✅ Subscribed → FULL plan
+   
     res.json(plan);
   } catch (error) {
     console.error("GET PLAN ERROR:", error);
@@ -85,9 +80,7 @@ export const getPlanById = async (req, res) => {
 };
 
 
-/* ================================
-   UPDATE PLAN (OWNER TRAINER)
-================================ */
+
 export const updatePlan = async (req, res) => {
   try {
     if (req.user.role !== "trainer") {
@@ -112,9 +105,7 @@ export const updatePlan = async (req, res) => {
   }
 };
 
-/* ================================
-   DELETE PLAN (OWNER TRAINER)
-================================ */
+
 export const deletePlan = async (req, res) => {
   try {
     if (req.user.role !== "trainer") {
@@ -124,7 +115,7 @@ export const deletePlan = async (req, res) => {
     const plan = await Plan.findById(req.params.id);
     if (!plan) return res.status(404).json("Plan not found");
 
-    // Ownership check
+  
     if (plan.trainer.toString() !== req.user.id) {
       return res.status(403).json("You do not own this plan");
     }

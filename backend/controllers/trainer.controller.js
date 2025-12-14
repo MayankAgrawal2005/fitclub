@@ -2,7 +2,7 @@ import User from "../models/User.js";
 import Plan from "../models/Plan.js";
 
 
-// Follow trainer
+
 export const followTrainer = async (req, res) => {
 const user = await User.findById(req.user.id);
 
@@ -20,7 +20,7 @@ res.json({ message: "Trainer followed" });
 };
 
 
-// Unfollow trainer
+
 export const unfollowTrainer = async (req, res) => {
 const user = await User.findById(req.user.id);
 user.following = user.following.filter(
@@ -33,7 +33,7 @@ res.json({ message: "Trainer unfollowed" });
 };
 
 
-// Trainer profile + plans
+
 export const trainerProfile = async (req, res) => {
 const trainer = await User.findById(req.params.id).select("name email");
 const plans = await Plan.find({ trainer: req.params.id });

@@ -15,28 +15,7 @@ export default function TrainerDashboard() {
     duration: "",
   });
 
-  /* =========================
-     FETCH TRAINER PLANS
-  ========================= */
-//   const fetchPlans = async () => {
-//     const res = await api.get("/plans", {
-//       headers: { Authorization: `Bearer ${token}` },
-//     });
-//     if (!user) {
-//     setPlans([]);
-//     return;
-//   }
-//     // only this trainer's plans
-//     const myPlans = res.data.filter(
-//       (p) => p.trainer?._id === user.id
-//     );
 
-//     setPlans(myPlans);
-//   };
-
-//   useEffect(() => {
-//     fetchPlans();
-//   }, []);
 const fetchPlans = async () => {
   const res = await api.get("/plans", {
     headers: { Authorization: `Bearer ${token}` },
@@ -55,9 +34,7 @@ useEffect(() => {
 
 
 
-  /* =========================
-     CREATE / UPDATE PLAN
-  ========================= */
+
   const submitPlan = async () => {
     const payload = {
       ...form,
@@ -82,9 +59,7 @@ useEffect(() => {
     fetchPlans();
   };
 
-  /* =========================
-     EDIT PLAN
-  ========================= */
+
   const editPlan = (plan) => {
     setEditingId(plan._id);
     setForm({
@@ -95,9 +70,7 @@ useEffect(() => {
     });
   };
 
-  /* =========================
-     DELETE PLAN
-  ========================= */
+
   const deletePlan = async (id) => {
     if (!window.confirm("Delete this plan?")) return;
 
@@ -111,7 +84,7 @@ useEffect(() => {
 
   return (
     <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-      {/* LEFT: PLANS LIST (LIKE LANDING) */}
+     
       <div className="md:col-span-2 space-y-4">
         <h2 className="text-xl font-bold">My Fitness Plans</h2>
 
@@ -150,7 +123,7 @@ useEffect(() => {
         ))}
       </div>
 
-      {/* RIGHT: CREATE / EDIT FORM */}
+   
       <div className="border rounded-lg p-4 shadow">
         <h2 className="text-lg font-bold mb-4">
           {editingId ? "Edit Plan" : "Create Plan"}
